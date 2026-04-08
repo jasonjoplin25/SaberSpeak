@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SaberSpeak</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="widget">
+    <button id="status-btn" class="state-inactive" title="Click to toggle listening">
+      🎤
+    </button>
+
+    <div id="text-area">
+      <div id="status-label">Inactive — click mic to start</div>
+      <div id="transcript"></div>
+    </div>
+
+    <div id="progress-bar-wrap">
+      <div id="progress-bar"></div>
+    </div>
+  </div>
+
+  <script src="renderer.global.js"></script>
+</body>
+</html>

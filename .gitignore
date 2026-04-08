@@ -1,0 +1,7 @@
+node_modules/
+dist/
+release/
+bundled-python/
+*.log
+.DS_Store
+*:Zone.Identifier

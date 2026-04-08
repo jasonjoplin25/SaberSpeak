@@ -1,0 +1,137 @@
+/* SaberSpeak widget styles */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 300px;
+  height: 72px;
+  overflow: hidden;
+  background: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#widget {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 0 12px;
+  background: rgba(18, 18, 22, 0.92);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  cursor: grab;
+}
+
+#widget:active { cursor: grabbing; }
+
+/* ── Status button ────────────────────────────────────────────────────── */
+
+#status-btn {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.12s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  position: relative;
+}
+
+#status-btn:active { transform: scale(0.92); }
+
+/* State colours */
+#status-btn.state-inactive   { background: #3a3a4a; }
+#status-btn.state-setup      { background: #3a3a4a; }
+#status-btn.state-scanning   { background: #d97706; }
+#status-btn.state-listening  { background: #16a34a; }
+#status-btn.state-processing { background: #2563eb; }
+#status-btn.state-error      { background: #dc2626; }
+
+/* Pulse ring — shown on scanning / listening / processing */
+#status-btn::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#status-btn.state-scanning::after  { border: 2px solid #d97706; animation: pulse 1.6s ease-in-out infinite; }
+#status-btn.state-listening::after { border: 2px solid #16a34a; animation: pulse 0.9s ease-in-out infinite; }
+#status-btn.state-processing::after { border: 2px solid #2563eb; animation: pulse 0.6s ease-in-out infinite; }
+
+@keyframes pulse {
+  0%   { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 0;   transform: scale(1.7); }
+}
+
+/* Spin animation for setup */
+#status-btn.state-setup { animation: spin 1s linear infinite; }
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Text area ────────────────────────────────────────────────────────── */
+
+#text-area {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#status-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#transcript {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.88);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 18px;
+}
+
+/* ── Setup progress bar ───────────────────────────────────────────────── */
+
+#progress-bar-wrap {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  right: 12px;
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  display: none;
+}
+
+#progress-bar-wrap.visible { display: block; }
+
+#progress-bar {
+  height: 100%;
+  background: #d97706;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
